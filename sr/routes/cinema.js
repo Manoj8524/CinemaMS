@@ -4,11 +4,13 @@ const router = express.Router();
 
 // Create Cinema
 router.post('/cinemas', async (req, res) => {
+  console.log(req.body); // Log incoming request body
   try {
     const newCinema = new Cinema(req.body);
     await newCinema.save();
     res.status(201).json(newCinema);
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(400).json({ message: error.message });
   }
 });
@@ -41,6 +43,7 @@ router.put('/cinemas/:id', async (req, res) => {
     if (!updatedCinema) return res.status(404).json({ message: 'Cinema not found' });
     res.json(updatedCinema);
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(400).json({ message: error.message });
   }
 });

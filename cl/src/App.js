@@ -15,15 +15,13 @@ const App = () => {
       <h1 className="text-2xl font-bold mb-4">Cinema Theatre System</h1>
       <TheatreList />
 
-      <h1 className="text-3xl font-bold">Cinema Theatre Management</h1>
+      <h1 className="text-2xl font-bold mb-4">Cinema Theatre System</h1>
       <ScreenList />
-
-      <h1 className="text-center text-3xl font-bold my-5">Cinema Theatre System</h1>
+      <h1 className="text-2xl font-bold mb-4">Cinema Theatre System</h1>
       <SeatManagement />
 
       <h1 className="text-2xl font-bold mb-4">Cinema Theatre System</h1>
       <ShowtimeForm />
-
       <h1 className="text-2xl font-bold mb-4">Cinema Theatre System</h1>
       <Movies />
     </div>

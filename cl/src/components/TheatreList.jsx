@@ -7,12 +7,18 @@ const TheatreList = () => {
   const [theatres, setTheatres] = useState([]);
   const [editingTheatre, setEditingTheatre] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTheatres = async () => {
-      const response = await axios.get('http://localhost:5000/api/theatres');
-      setTheatres(response.data);
-      setLoading(false);
+      try {
+        const response = await axios.get('http://localhost:5000/api/theatres');
+        setTheatres(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load theatres.');
+        setLoading(false);
+      }
     };
     fetchTheatres();
   }, []);
@@ -22,20 +28,28 @@ const TheatreList = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/theatres/${id}`);
-    setTheatres(theatres.filter(theatre => theatre._id !== id));
+    try {
+      await axios.delete(`http://localhost:5000/api/theatres/${id}`);
+      setTheatres(theatres.filter(theatre => theatre._id !== id));
+    } catch (err) {
+      setError('Failed to delete theatre.');
+    }
   };
 
   const handleSave = async () => {
-    
-    const response = await axios.get('http://localhost:5000/api/theatres');
-    setTheatres(response.data);
-    setEditingTheatre(null);
+    try {
+      const response = await axios.get('http://localhost:5000/api/theatres');
+      setTheatres(response.data);
+      setEditingTheatre(null);
+    } catch (err) {
+      setError('Failed to refresh theatres.');
+    }
   };
 
   return (
     <div>
       <h1 className="text-2xl font-bold">Theatres</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       {loading ? (
         <p>Loading...</p>
       ) : (
