@@ -24,11 +24,11 @@ const ShowtimeForm = () => {
     };
 
     const createShowtime = async (showtime) => {
-        return await axios.post('http://localhost:5000/api/showtimes', showtime);
+        return await axios.post('https://cinemams.onrender.com/api/showtimes', showtime);
     };
 
     const updateShowtime = async (id, showtime) => {
-        return await axios.put(`http://localhost:5000/api/showtimes/${id}`, showtime);
+        return await axios.put(`https://cinemams.onrender.com/api/showtimes/${id}`, showtime);
     };
 
     const handleSubmit = async () => {
@@ -59,7 +59,7 @@ const ShowtimeForm = () => {
     };
 
     const fetchShowtimes = async () => {
-        const response = await axios.get('http://localhost:5000/api/showtimes');
+        const response = await axios.get('https://cinemams.onrender.com/api/showtimes');
         setShowtimes(response.data);
     };
 

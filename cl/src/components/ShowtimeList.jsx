@@ -6,7 +6,7 @@ const ShowtimeList = ({ showtimes, fetchShowtimes, setEditShowtime }) => {
     // Handle delete operation
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/showtimes/${id}`);
+            await axios.delete(`https://cinemams.onrender.com/api/showtimes/${id}`);
             fetchShowtimes(); // Refresh showtime list after delete
         } catch (error) {
             console.error("Error deleting showtime:", error);

@@ -39,11 +39,11 @@ const TheatreForm = ({ theatre, onSave, onCancel }) => {
       setLoading(true);
       if (theatre && theatre._id) {
         // PUT request for updating an existing theatre
-        await axios.put(`http://localhost:5000/api/theatres/${theatre._id}`, theatreData);
+        await axios.put(`https://cinemams.onrender.com/api/theatres/${theatre._id}`, theatreData);
         message.success('Theatre updated successfully.');
       } else {
         // POST request for creating a new theatre
-        await axios.post('http://localhost:5000/api/theatres', theatreData);
+        await axios.post('https://cinemams.onrender.com/api/theatres', theatreData);
         message.success('Theatre created successfully.');
       }
       onSave(); // Refresh the list after save

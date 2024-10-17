@@ -21,7 +21,7 @@ const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
     try {
       if (seat) {
         // Update the existing seat
-        await axios.put(`http://localhost:5000/api/seats/${seat._id}`, {
+        await axios.put(`https://cinemams.onrender.com/api/seats/${seat._id}`, {
           seatNumber: seatNumbers[0], // For simplicity, assuming we're updating one seat
           screen: screenId,
           theatre: theatreId,
@@ -29,7 +29,7 @@ const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
       } else {
         // Create new seats
         for (const seatNumber of seatNumbers) {
-          await axios.post('http://localhost:5000/api/seats', {
+          await axios.post('https://cinemams.onrender.com/api/seats', {
             seatNumber,
             screen: screenId,
             theatre: theatreId,

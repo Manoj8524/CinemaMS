@@ -12,7 +12,7 @@ const ScreenList = () => {
   useEffect(() => {
     const fetchScreens = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/screens'); // Update with your API endpoint
+        const response = await axios.get('https://cinemams.onrender.com/api/screens'); // Update with your API endpoint
         setScreens(response.data);
         setLoading(false);
       } catch (err) {
@@ -29,7 +29,7 @@ const ScreenList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/screens/${id}`); // Update with your API endpoint
+      await axios.delete(`https://cinemams.onrender.com/api/screens/${id}`); // Update with your API endpoint
       setScreens(screens.filter((screen) => screen._id !== id));
     } catch (err) {
       setError('Failed to delete screen.');
@@ -38,7 +38,7 @@ const ScreenList = () => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/screens'); // Update with your API endpoint
+      const response = await axios.get('https://cinemams.onrender.com/api/screens'); // Update with your API endpoint
       setScreens(response.data);
       setEditingScreen(null);
     } catch (err) {

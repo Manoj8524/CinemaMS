@@ -12,12 +12,12 @@ const SeatList = () => {
   }, []);
 
   const fetchSeats = async () => {
-    const response = await axios.get('http://localhost:5000/api/seats');
+    const response = await axios.get('https://cinemams.onrender.com/api/seats');
     setSeats(response.data);
   };
 
   const deleteSeat = async (id) => {
-    await axios.delete(`http://localhost:5000/api/seats/${id}`);
+    await axios.delete(`https://cinemams.onrender.com/api/seats/${id}`);
     setSeats((prevSeats) => prevSeats.filter((seat) => seat._id !== id));
   };
 

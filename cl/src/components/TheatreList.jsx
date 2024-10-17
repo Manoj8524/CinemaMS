@@ -12,7 +12,7 @@ const TheatreList = () => {
   useEffect(() => {
     const fetchTheatres = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/theatres');
+        const response = await axios.get('https://cinemams.onrender.com/api/theatres');
         setTheatres(response.data);
         setLoading(false);
       } catch (err) {
@@ -29,7 +29,7 @@ const TheatreList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/theatres/${id}`);
+      await axios.delete(`https://cinemams.onrender.com/api/theatres/${id}`);
       setTheatres(theatres.filter((theatre) => theatre._id !== id));
     } catch (err) {
       setError('Failed to delete theatre.');
@@ -38,7 +38,7 @@ const TheatreList = () => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/theatres');
+      const response = await axios.get('https://cinemams.onrender.com/api/theatres');
       setTheatres(response.data);
       setEditingTheatre(null);
     } catch (err) {

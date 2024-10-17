@@ -10,7 +10,7 @@ const MovieList = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await fetch('http://localhost:5000/api/movies');
+      const response = await fetch('https://cinemams.onrender.com/api/movies');
       const data = await response.json();
       setMovies(data);
     };
@@ -18,7 +18,7 @@ const MovieList = () => {
   }, []);
 
   const handleDeleteMovie = async (id) => {
-    const response = await fetch(`http://localhost:5000/api/movies/${id}`, {
+    const response = await fetch(`https://cinemams.onrender.com/api/movies/${id}`, {
       method: 'DELETE',
     });
 

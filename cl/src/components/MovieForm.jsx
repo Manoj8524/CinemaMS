@@ -26,7 +26,7 @@ const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
 
       if (selectedMovie) {
         // Update existing movie
-        await fetch(`http://localhost:5000/api/movies/${selectedMovie._id}`, {
+        await fetch(`https://cinemams.onrender.com/api/movies/${selectedMovie._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
         });
       } else {
         // Create new movie
-        await fetch('http://localhost:5000/api/movies', {
+        await fetch('https://cinemams.onrender.com/api/movies', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

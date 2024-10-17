@@ -37,13 +37,13 @@ const ScreenForm = ({ screen, onSave, onCancel }) => {
 
     try {
       if (screen && screen._id) {
-        await axios.put(`http://localhost:5000/api/screens/${screen._id}`, newScreen);
+        await axios.put(`https://cinemams.onrender.com/api/screens/${screen._id}`, newScreen);
         notification.success({
           message: 'Screen Updated',
           description: 'The screen details have been successfully updated.',
         });
       } else {
-        await axios.post('http://localhost:5000/api/screens', newScreen);
+        await axios.post('https://cinemams.onrender.com/api/screens', newScreen);
         notification.success({
           message: 'Screen Created',
           description: 'The new screen has been successfully created.',

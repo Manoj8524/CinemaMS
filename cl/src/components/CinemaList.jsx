@@ -9,7 +9,7 @@ import {
 } from 'antd';
 import CinemaForm from './CinemaForm'; // Import CinemaForm
 
-const API_URL = 'http://localhost:5000/api/cinemas';
+const API_URL = 'https://cinemams.onrender.com/api/cinemas';
 
 const CinemaList = () => {
   const [cinemas, setCinemas] = useState([]);

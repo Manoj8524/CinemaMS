@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Input, Button, notification, Space } from 'antd';
 
-const API_URL = 'http://localhost:5000/api/cinemas';
+const API_URL = 'https://cinemams.onrender.com/api/cinemas';
 
 const CinemaForm = ({ cinema, onSubmit, onClose }) => {
   const [form] = Form.useForm();
