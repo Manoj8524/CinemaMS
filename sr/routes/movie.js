@@ -14,14 +14,23 @@ router.post('/movies', async (req, res) => {
 });
 
 // Get All Movies
+// In your router file
 router.get('/movies', async (req, res) => {
   try {
-    const movies = await Movie.find().populate('runningAt');
+    const movies = await Movie.find()
+      .populate({
+        path: 'runningAt',
+        populate: {
+          path: 'theatre', // Populate the theatre field inside Screen
+          select: 'name', // Only fetch the theatre name
+        },
+      });
     res.json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 // Get Movie by ID
 router.get('/movies/:id', async (req, res) => {

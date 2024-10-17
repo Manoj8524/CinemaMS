@@ -1,37 +1,94 @@
-import React from 'react';
-import { Button } from '@mui/material';
-import { deleteShowtime } from '../api';
+import React from "react";
+import axios from "axios";
+import { Table, Button } from "antd";
 
-const ShowtimeList = ({ showtimes, fetchShowtimes }) => {
+const ShowtimeList = ({ showtimes, fetchShowtimes, setEditShowtime }) => {
+    // Handle delete operation
     const handleDelete = async (id) => {
-        await deleteShowtime(id);
-        fetchShowtimes(); // Refresh the showtime list
+        try {
+            await axios.delete(`http://localhost:5000/api/showtimes/${id}`);
+            fetchShowtimes(); // Refresh showtime list after delete
+        } catch (error) {
+            console.error("Error deleting showtime:", error);
+        }
     };
+
+    // Define table columns
+    const columns = [
+        {
+            title: 'ID',
+            dataIndex: '_id',
+            key: '_id',
+        },
+        {
+            title: 'Movie Title',
+            dataIndex: ['movie', 'title'],
+            key: 'movieTitle',
+            render: (text) => text || 'N/A',
+        },
+        {
+            title: 'Screen Number',
+            dataIndex: ['screen', 'screenNumber'],
+            key: 'screenNumber',
+            render: (text) => text || 'N/A',
+        },
+        {
+            title: 'First Show',
+            dataIndex: 'firstShow',
+            key: 'firstShow',
+        },
+        {
+            title: 'Second Show',
+            dataIndex: 'secondShow',
+            key: 'secondShow',
+        },
+        {
+            title: 'Third Show',
+            dataIndex: 'thirdShow',
+            key: 'thirdShow',
+        },
+        {
+            title: 'Fourth Show',
+            dataIndex: 'fourthShow',
+            key: 'fourthShow',
+        },
+        {
+            title: 'Date',
+            dataIndex: 'date',
+            key: 'date',
+            render: (text) => new Date(text).toLocaleDateString(),
+        },
+        {
+            title: 'Actions',
+            key: 'actions',
+            render: (text, record) => (
+                <span>
+                    <Button
+                        type="primary"
+                        onClick={() => setEditShowtime(record)}
+                        style={{ marginRight: 8 }}
+                    >
+                        Edit
+                    </Button>
+                    <Button type="danger" onClick={() => handleDelete(record._id)}>
+                        Delete
+                    </Button>
+                </span>
+            ),
+        },
+    ];
 
     return (
         <div className="mt-5">
-            <h2 className="text-2xl font-semibold mb-4">Showtime List</h2>
-            <ul className="space-y-2">
-                {showtimes.map((showtime) => (
-                    <li key={showtime._id} className="flex justify-between items-center bg-gray-100 p-4 rounded shadow">
-                        <div>
-                            <strong>Movie:</strong> {showtime.movie} | 
-                            <strong> Screen:</strong> {showtime.screen} | 
-                            <strong> Time:</strong> {showtime.time} | 
-                            <strong> Date:</strong> {new Date(showtime.date).toLocaleDateString()} | 
-                            <strong> Price:</strong> ${showtime.price}
-                        </div>
-                        <Button 
-                            variant="outlined" 
-                            color="secondary" 
-                            onClick={() => handleDelete(showtime._id)}
-                        >
-                            Delete
-                        </Button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <h2 className="text-2xl font-semibold mb-4 text-center">Showtime List</h2>
+        <Table
+            columns={columns}
+            dataSource={showtimes}
+            rowKey="_id"
+            pagination={{ pageSize: 5 }}
+        />
+    </div>
+    
     );
 };
 

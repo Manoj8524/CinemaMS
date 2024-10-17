@@ -16,12 +16,28 @@ router.post('/screens', async (req, res) => {
 // Get all Screens
 router.get('/screens', async (req, res) => {
   try {
-    const screens = await Screen.find().populate('movies seats');
+    const screens = await Screen.find()
+      .populate({
+        path: 'theatre',
+        select: 'name', // Get only the name of the theatre
+      })
+      .populate({
+        path: 'movies',
+        select: 'title', // Get only the title of the movies
+      })
+      .populate({
+        path: 'seats', // Populate seats
+        select: 'seatNumber', // Get only the seat number
+      });
+
     res.json(screens);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
+
+
 
 // Get Screen by ID
 router.get('/screens/:id', async (req, res) => {
@@ -36,6 +52,13 @@ router.get('/screens/:id', async (req, res) => {
 
 // Update Screen
 router.put('/screens/:id', async (req, res) => {
+  const { screenNumber, theatre, movies, seats } = req.body;
+
+  // Simple validation
+  if (!screenNumber || !theatre) {
+    return res.status(400).json({ message: 'Screen number and theatre are required' });
+  }
+
   try {
     const updatedScreen = await Screen.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedScreen) return res.status(404).json({ message: 'Screen not found' });
@@ -44,6 +67,7 @@ router.put('/screens/:id', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
 
 // Delete Screen
 router.delete('/screens/:id', async (req, res) => {

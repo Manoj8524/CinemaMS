@@ -14,25 +14,25 @@ router.post('/theatres', async (req, res) => {
 });
 
 // Get all Theatres
+// Get theatres with populated cinema and screens info
 router.get('/theatres', async (req, res) => {
   try {
-    const theatres = await Theatre.find().populate('screens');
+    const theatres = await Theatre.find()
+      .populate({
+        path: 'cinema', // Populate the cinema field
+        select: 'name location _id' // Select name, location, and _id fields
+      })
+      .populate({
+        path: 'screens', // Populate screens field
+        select: 'screenNumber' // Select only the screenNumber field
+      });
+
     res.json(theatres);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get Theatre by ID
-router.get('/theatres/:id', async (req, res) => {
-  try {
-    const theatre = await Theatre.findById(req.params.id).populate('screens');
-    if (!theatre) return res.status(404).json({ message: 'Theatre not found' });
-    res.json(theatre);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
 
 // Update Theatre
 router.put('/theatres/:id', async (req, res) => {

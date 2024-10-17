@@ -16,7 +16,9 @@ router.post('/showtimes', async (req, res) => {
 // Get All Showtimes
 router.get('/showtimes', async (req, res) => {
   try {
-    const showtimes = await Showtime.find().populate('movie screen');
+    const showtimes = await Showtime.find()
+      .populate('movie', 'title') // Get only the title from Movie
+      .populate('screen', 'screenNumber'); // Get screenNumber from Screen
     res.json(showtimes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -26,7 +28,9 @@ router.get('/showtimes', async (req, res) => {
 // Get Showtime by ID
 router.get('/showtimes/:id', async (req, res) => {
   try {
-    const showtime = await Showtime.findById(req.params.id).populate('movie screen');
+    const showtime = await Showtime.findById(req.params.id)
+      .populate('movie', 'title')
+      .populate('screen', 'screenNumber');
     if (!showtime) return res.status(404).json({ message: 'Showtime not found' });
     res.json(showtime);
   } catch (error) {
@@ -37,7 +41,9 @@ router.get('/showtimes/:id', async (req, res) => {
 // Update Showtime
 router.put('/showtimes/:id', async (req, res) => {
   try {
-    const updatedShowtime = await Showtime.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedShowtime = await Showtime.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .populate('movie', 'title')
+      .populate('screen', 'screenNumber');
     if (!updatedShowtime) return res.status(404).json({ message: 'Showtime not found' });
     res.json(updatedShowtime);
   } catch (error) {

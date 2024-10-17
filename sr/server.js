@@ -4,8 +4,27 @@ const app = express();
 const cors = require('cors');
 app.use(express.json()); // For JSON parsing
 
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:3000', // First local host
+  'http://localhost:4000'  // Second local host
+];
 
-app.use(cors());
+// CORS options
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+// Use CORS with the defined options
+app.use(cors(corsOptions));
+
 // MongoDB connection
 mongoose.connect('mongodb+srv://manoj852407:cJBHyB30RYfvM2g8@stone-paper-scissors.takw4.mongodb.net/?retryWrites=true&w=majority&appName=stone-paper-scissors', {
   useNewUrlParser: true,
