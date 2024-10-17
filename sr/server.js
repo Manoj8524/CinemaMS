@@ -7,7 +7,7 @@ app.use(express.json()); // For JSON parsing
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:3000', // First local host
-  'http://localhost:4000'  // Second local host
+  'https://cinema-ms.vercel.app'  // Second local host
 ];
 
 // CORS options
