@@ -6,9 +6,8 @@ app.use(express.json());
 
 
 const allowedOrigins = [
-  'https://cinema-ms.vercel.app' ,
-  'http://localhost:3000' 
-   
+  'http://localhost:3000',
+  'https://cinema-ms.vercel.app'  
 ];
 
 
