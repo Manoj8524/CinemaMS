@@ -2,7 +2,7 @@ const express = require('express');
 const Theatre = require('../models/Theatre');
 const router = express.Router();
 
-// Create Theatre
+
 router.post('/theatres', async (req, res) => {
   try {
     const newTheatre = new Theatre(req.body);
@@ -13,18 +13,17 @@ router.post('/theatres', async (req, res) => {
   }
 });
 
-// Get all Theatres
-// Get theatres with populated cinema and screens info
+
 router.get('/theatres', async (req, res) => {
   try {
     const theatres = await Theatre.find()
       .populate({
-        path: 'cinema', // Populate the cinema field
-        select: 'name location _id' // Select name, location, and _id fields
+        path: 'cinema',
+        select: 'name location _id'
       })
       .populate({
-        path: 'screens', // Populate screens field
-        select: 'screenNumber' // Select only the screenNumber field
+        path: 'screens', 
+        select: 'screenNumber' 
       });
 
     res.json(theatres);
@@ -34,7 +33,7 @@ router.get('/theatres', async (req, res) => {
 });
 
 
-// Update Theatre
+
 router.put('/theatres/:id', async (req, res) => {
   try {
     const updatedTheatre = await Theatre.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -45,7 +44,7 @@ router.put('/theatres/:id', async (req, res) => {
   }
 });
 
-// Delete Theatre
+
 router.delete('/theatres/:id', async (req, res) => {
   try {
     const theatre = await Theatre.findByIdAndDelete(req.params.id);

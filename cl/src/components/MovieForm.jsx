@@ -5,27 +5,27 @@ import { useNavigate } from 'react-router-dom';
 
 const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
   const [form] = Form.useForm();
-  const [screenIds, setScreenIds] = useState(['']); // Initial state for screen IDs
+  const [screenIds, setScreenIds] = useState(['']); 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedMovie) {
       form.setFieldsValue(selectedMovie);
-      setScreenIds(selectedMovie.runningAt || ['']); // Set the screen IDs from selected movie
+      setScreenIds(selectedMovie.runningAt || ['']); 
     } else {
       form.resetFields();
-      setScreenIds(['']); // Reset the screen IDs for adding a new movie
+      setScreenIds(['']); 
     }
   }, [selectedMovie, form]);
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      // Add screen IDs to the form values
-      values.runningAt = screenIds.filter(id => id); // Filter out any empty IDs
+     
+      values.runningAt = screenIds.filter(id => id); 
 
       if (selectedMovie) {
-        // Update existing movie
+       
         await fetch(`https://cinemams.onrender.com/api/movies/${selectedMovie._id}`, {
           method: 'PUT',
           headers: {
@@ -34,7 +34,7 @@ const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
           body: JSON.stringify(values),
         });
       } else {
-        // Create new movie
+       
         await fetch('https://cinemams.onrender.com/api/movies', {
           method: 'POST',
           headers: {
@@ -43,26 +43,26 @@ const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
           body: JSON.stringify(values),
         });
       }
-      // Reset selected movie after submission
+      
       setSelectedMovie(null);
-      navigate('/'); // Optionally navigate after submission
+      navigate('/'); 
     } catch (error) {
       console.error('Validation Failed:', error);
     }
   };
 
   const addScreenIdField = () => {
-    setScreenIds([...screenIds, '']); // Add a new empty field for screen ID
+    setScreenIds([...screenIds, '']);
   };
 
   const handleScreenIdChange = (value, index) => {
     const newScreenIds = [...screenIds];
-    newScreenIds[index] = value; // Update the specific screen ID
+    newScreenIds[index] = value; 
     setScreenIds(newScreenIds);
   };
 
   const removeScreenIdField = (index) => {
-    const newScreenIds = screenIds.filter((_, i) => i !== index); // Remove the specified index
+    const newScreenIds = screenIds.filter((_, i) => i !== index); 
     setScreenIds(newScreenIds);
   };
 

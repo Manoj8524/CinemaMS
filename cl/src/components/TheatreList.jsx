@@ -78,7 +78,7 @@ const TheatreList = () => {
       title: 'Screens',
       dataIndex: 'screens',
       key: 'screens',
-      render: (screens) => screens.length > 0 ? screens.map(screen => screen.screenNumber).join(', ') : 'No Screens', // Show screen numbers
+      render: (screens) => screens.length > 0 ? screens.map(screen => screen.screenNumber).join(', ') : 'No Screens', 
     },
     {
       title: 'Actions',
@@ -95,16 +95,16 @@ const TheatreList = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Theatre Form Section */}
+     
       <div style={{ width: '20%', padding: '1rem', borderRight: '1px solid #eaeaea' }}>
         <Typography.Title level={4} style={{ textAlign: 'center' }}>
           Theatre Form
         </Typography.Title>
-        {/* Always visible TheatreForm */}
+     
         <TheatreForm theatre={editingTheatre} onSave={handleSave} onCancel={() => setEditingTheatre(null)} />
       </div>
 
-      {/* Theatre Table Section */}
+    
       <div style={{ width: '80%', padding: '1rem' }}>
         <Typography.Title level={2} style={{ textAlign: 'center' }}>
           Theatres

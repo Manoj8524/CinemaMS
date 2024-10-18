@@ -6,24 +6,23 @@ const API_URL = 'https://cinemams.onrender.com/api/cinemas';
 
 const CinemaForm = ({ cinema, onSubmit, onClose }) => {
   const [form] = Form.useForm();
-  const [theatres, setTheatres] = useState([]); // State for storing theatre IDs
+  const [theatres, setTheatres] = useState([]); 
 
-  // Initialize form fields based on the cinema prop
   useEffect(() => {
     if (cinema) {
       form.setFieldsValue({
         name: cinema.name,
         location: cinema.location,
       });
-      setTheatres(cinema.theatres); // Set the initial theatre IDs
+      setTheatres(cinema.theatres); 
     } else {
-      form.resetFields(); // Reset the fields if there's no cinema prop
-      setTheatres([]); // Clear theatre IDs if no cinema
+      form.resetFields(); 
+      setTheatres([]);
     }
   }, [cinema, form]);
 
   const handleSubmit = async (values) => {
-    // Validate theatre IDs
+
     if (theatres.some((id) => !id)) {
       notification.error({
         message: 'Validation Error',
@@ -35,7 +34,7 @@ const CinemaForm = ({ cinema, onSubmit, onClose }) => {
     const newCinema = {
       name: values.name,
       location: values.location,
-      theatres: theatres, // Use the current state of theatre IDs
+      theatres: theatres, 
     };
 
     try {
@@ -48,10 +47,10 @@ const CinemaForm = ({ cinema, onSubmit, onClose }) => {
         message: 'Success',
         description: 'Cinema saved successfully!',
       });
-      form.resetFields(); // Reset form fields after submission
-      setTheatres([]); // Clear theatre IDs after submission
+      form.resetFields(); 
+      setTheatres([]); 
       onSubmit();
-      onClose(); // Close the form after submission
+      onClose(); 
     } catch (err) {
       notification.error({
         message: 'Save Error',
@@ -61,23 +60,23 @@ const CinemaForm = ({ cinema, onSubmit, onClose }) => {
   };
 
   const addTheatreField = () => {
-    setTheatres([...theatres, '']); // Add a new empty theatre ID
+    setTheatres([...theatres, '']); 
   };
 
   const handleTheatreChange = (index, value) => {
     const newTheatres = [...theatres];
-    newTheatres[index] = value; // Update the theatre ID at the specific index
+    newTheatres[index] = value; 
     setTheatres(newTheatres);
   };
 
-  // Center form content and remove extra space
+
   const formContainerStyle = {
-    display: 'flex', // Always display the form
+    display: 'flex', 
     justifyContent: 'center',
     alignItems: 'center',
     height: '45vh',
-    padding: 0, // Remove padding
-    margin: 0, // Remove margin
+    padding: 0, 
+    margin: 0, 
   };
 
   return (
@@ -85,7 +84,7 @@ const CinemaForm = ({ cinema, onSubmit, onClose }) => {
       <Form form={form} layout="vertical" onFinish={handleSubmit} style={{ width: '100%', maxWidth: '600px', margin: '0' }}>
         {cinema && (
           <Form.Item label="Cinema ID">
-            <Input disabled value={cinema._id} /> {/* Display the Cinema ID */}
+            <Input disabled value={cinema._id} />
           </Form.Item>
         )}
         <Form.Item
@@ -111,7 +110,7 @@ const CinemaForm = ({ cinema, onSubmit, onClose }) => {
                 value={theatre}
                 onChange={(e) => handleTheatreChange(index, e.target.value)}
                 placeholder={`Theatre ID ${index + 1}`}
-                style={{ width: 'calc(100% - 100px)' }} // Adjust width as necessary
+                style={{ width: 'calc(100% - 100px)' }} 
               />
               <Button type="link" onClick={() => setTheatres(theatres.filter((_, i) => i !== index))}>
                 Remove

@@ -5,7 +5,7 @@ import SeatForm from './SeatForm';
 
 const SeatList = () => {
   const [seats, setSeats] = useState([]);
-  const [editingSeat, setEditingSeat] = useState(null); // State for the seat being edited
+  const [editingSeat, setEditingSeat] = useState(null); 
 
   useEffect(() => {
     fetchSeats();
@@ -22,7 +22,7 @@ const SeatList = () => {
   };
 
   const editSeat = (record) => {
-    setEditingSeat(record); // Set the seat to be edited
+    setEditingSeat(record); 
   };
 
   const columns = [
@@ -43,7 +43,7 @@ const SeatList = () => {
       render: (text, record) => record.screen._id,
     },
     {
-      title: 'Screen Number', // New column for Screen Number
+      title: 'Screen Number',
       dataIndex: 'screen',
       key: 'screenNumber',
       render: (text, record) => record.screen.screenNumber,
@@ -75,7 +75,7 @@ const SeatList = () => {
   return (
     <div style={{ display: 'flex', width: '100%', margin: 'auto', padding: '20px' }}>
       <div style={{ width: '20%', marginRight: '20px' }}>
-        <SeatForm seat={editingSeat} onClose={() => setEditingSeat(null)} /> {/* Pass seat data to SeatForm */}
+        <SeatForm seat={editingSeat} onClose={() => setEditingSeat(null)} /> 
       </div>
       <div style={{ width: '80%' }}>
         <Table columns={columns} dataSource={seats} rowKey="_id" pagination={false} />

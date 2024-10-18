@@ -61,31 +61,31 @@ const ScreenForm = ({ screen, onSave, onCancel }) => {
   };
 
   const addMovieField = () => {
-    setMovies([...movies, '']); // Add an empty movie field
+    setMovies([...movies, '']);
   };
 
   const handleMovieChange = (index, value) => {
     const newMovies = [...movies];
-    newMovies[index] = value; // Update the movie at the specified index
+    newMovies[index] = value; 
     setMovies(newMovies);
   };
 
   const removeMovieField = (index) => {
-    setMovies(movies.filter((_, i) => i !== index)); // Remove the movie at the specified index
+    setMovies(movies.filter((_, i) => i !== index)); 
   };
 
   const addSeatField = () => {
-    setSeats([...seats, '']); // Add an empty seat field
+    setSeats([...seats, '']); 
   };
 
   const handleSeatChange = (index, value) => {
     const newSeats = [...seats];
-    newSeats[index] = value; // Update the seat at the specified index
+    newSeats[index] = value; 
     setSeats(newSeats);
   };
 
   const removeSeatField = (index) => {
-    setSeats(seats.filter((_, i) => i !== index)); // Remove the seat at the specified index
+    setSeats(seats.filter((_, i) => i !== index)); 
   };
 
   return (

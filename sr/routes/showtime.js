@@ -2,7 +2,7 @@ const express = require('express');
 const Showtime = require('../models/Showtime');
 const router = express.Router();
 
-// Create Showtime
+
 router.post('/showtimes', async (req, res) => {
   try {
     const newShowtime = new Showtime(req.body);
@@ -13,19 +13,18 @@ router.post('/showtimes', async (req, res) => {
   }
 });
 
-// Get All Showtimes
+
 router.get('/showtimes', async (req, res) => {
   try {
     const showtimes = await Showtime.find()
-      .populate('movie', 'title') // Get only the title from Movie
-      .populate('screen', 'screenNumber'); // Get screenNumber from Screen
+      .populate('movie', 'title')
+      .populate('screen', 'screenNumber'); 
     res.json(showtimes);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get Showtime by ID
 router.get('/showtimes/:id', async (req, res) => {
   try {
     const showtime = await Showtime.findById(req.params.id)
@@ -38,7 +37,7 @@ router.get('/showtimes/:id', async (req, res) => {
   }
 });
 
-// Update Showtime
+
 router.put('/showtimes/:id', async (req, res) => {
   try {
     const updatedShowtime = await Showtime.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -51,7 +50,7 @@ router.put('/showtimes/:id', async (req, res) => {
   }
 });
 
-// Delete Showtime
+
 router.delete('/showtimes/:id', async (req, res) => {
   try {
     const showtime = await Showtime.findByIdAndDelete(req.params.id);

@@ -1,10 +1,10 @@
 const express = require('express');
 const Seat = require('../models/Seat');
-const Screen = require('../models/Screen'); // Assuming this exists
-const Theatre = require('../models/Theatre'); // Assuming this exists
+const Screen = require('../models/Screen'); 
+const Theatre = require('../models/Theatre'); 
 const router = express.Router();
 
-// Create Seat
+
 router.post('/seats', async (req, res) => {
   try {
     const newSeat = new Seat(req.body);
@@ -15,7 +15,7 @@ router.post('/seats', async (req, res) => {
   }
 });
 
-// Get All Seats with populated Screen and Theatre
+
 router.get('/seats', async (req, res) => {
   try {
     const seats = await Seat.find().populate('screen theatre');
@@ -25,7 +25,7 @@ router.get('/seats', async (req, res) => {
   }
 });
 
-// Get Seat by ID with populated Screen and Theatre
+
 router.get('/seats/:id', async (req, res) => {
   try {
     const seat = await Seat.findById(req.params.id).populate('screen theatre');
@@ -36,7 +36,7 @@ router.get('/seats/:id', async (req, res) => {
   }
 });
 
-// Update Seat
+
 router.put('/seats/:id', async (req, res) => {
   try {
     const updatedSeat = await Seat.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('screen theatre');
@@ -47,7 +47,7 @@ router.put('/seats/:id', async (req, res) => {
   }
 });
 
-// Delete Seat
+
 router.delete('/seats/:id', async (req, res) => {
   try {
     const seat = await Seat.findByIdAndDelete(req.params.id);

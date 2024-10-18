@@ -2,7 +2,7 @@ const express = require('express');
 const Screen = require('../models/Screen');
 const router = express.Router();
 
-// Create Screen
+
 router.post('/screens', async (req, res) => {
   try {
     const newScreen = new Screen(req.body);
@@ -13,21 +13,20 @@ router.post('/screens', async (req, res) => {
   }
 });
 
-// Get all Screens
 router.get('/screens', async (req, res) => {
   try {
     const screens = await Screen.find()
       .populate({
         path: 'theatre',
-        select: 'name', // Get only the name of the theatre
+        select: 'name',
       })
       .populate({
         path: 'movies',
-        select: 'title', // Get only the title of the movies
+        select: 'title', 
       })
       .populate({
-        path: 'seats', // Populate seats
-        select: 'seatNumber', // Get only the seat number
+        path: 'seats', 
+        select: 'seatNumber', 
       });
 
     res.json(screens);
@@ -39,7 +38,7 @@ router.get('/screens', async (req, res) => {
 
 
 
-// Get Screen by ID
+
 router.get('/screens/:id', async (req, res) => {
   try {
     const screen = await Screen.findById(req.params.id).populate('movies seats');
@@ -50,11 +49,11 @@ router.get('/screens/:id', async (req, res) => {
   }
 });
 
-// Update Screen
+
 router.put('/screens/:id', async (req, res) => {
   const { screenNumber, theatre, movies, seats } = req.body;
 
-  // Simple validation
+
   if (!screenNumber || !theatre) {
     return res.status(400).json({ message: 'Screen number and theatre are required' });
   }
@@ -69,7 +68,6 @@ router.put('/screens/:id', async (req, res) => {
 });
 
 
-// Delete Screen
 router.delete('/screens/:id', async (req, res) => {
   try {
     const screen = await Screen.findByIdAndDelete(req.params.id);

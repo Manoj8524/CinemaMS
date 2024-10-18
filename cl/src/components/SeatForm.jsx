@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input, Typography, Row, Col, message } from 'antd';
 import axios from 'axios';
 
-const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
-  const [screenId, setScreenId] = useState(seat ? seat.screen : ''); // Populate screenId if seat exists
-  const [theatreId, setTheatreId] = useState(seat ? seat.theatre : ''); // Populate theatreId if seat exists
-  const [section, setSection] = useState(seat ? seat.seatNumber.split(':')[0] : 'A'); // Extract section if seat exists
-  const [totalSeats, setTotalSeats] = useState(seat ? 1 : 10); // Default to 1 for editing
+const SeatForm = ({ seat, onClose }) => { 
+  const [screenId, setScreenId] = useState(seat ? seat.screen : ''); 
+  const [theatreId, setTheatreId] = useState(seat ? seat.theatre : ''); 
+  const [section, setSection] = useState(seat ? seat.seatNumber.split(':')[0] : 'A');
+  const [totalSeats, setTotalSeats] = useState(seat ? 1 : 10); 
 
   const generateSeatNumbers = () => {
     let seatNumbers = [];
@@ -20,14 +20,14 @@ const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
     const seatNumbers = generateSeatNumbers();
     try {
       if (seat) {
-        // Update the existing seat
+     
         await axios.put(`https://cinemams.onrender.com/api/seats/${seat._id}`, {
-          seatNumber: seatNumbers[0], // For simplicity, assuming we're updating one seat
+          seatNumber: seatNumbers[0], 
           screen: screenId,
           theatre: theatreId,
         });
       } else {
-        // Create new seats
+        
         for (const seatNumber of seatNumbers) {
           await axios.post('https://cinemams.onrender.com/api/seats', {
             seatNumber,
@@ -36,25 +36,25 @@ const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
           });
         }
       }
-      message.success(seat ? 'Seat updated successfully!' : 'Seats added successfully!'); // Show success message
+      message.success(seat ? 'Seat updated successfully!' : 'Seats added successfully!'); 
     } catch (error) {
-      message.error('Error while adding/updating seats'); // Handle error
+      message.error('Error while adding/updating seats');
     } finally {
-      // Reset form fields after submission
+      
       setScreenId('');
       setTheatreId('');
       setSection('A');
       setTotalSeats(10);
-      if (onClose) onClose(); // Close the form if onClose function is provided
+      if (onClose) onClose(); 
     }
   };
 
   useEffect(() => {
     if (seat) {
-      setScreenId(seat.screen); // Populate form with seat data when editing
+      setScreenId(seat.screen); 
       setTheatreId(seat.theatre);
       setSection(seat.seatNumber.split(':')[0]);
-      setTotalSeats(1); // Set to 1 if editing, assuming only one seat is edited
+      setTotalSeats(1); 
     }
   }, [seat]);
 
@@ -75,7 +75,7 @@ const SeatForm = ({ seat, onClose }) => {  // Accept seat and onClose as props
           <Input placeholder="Total Seats" type="number" value={totalSeats} onChange={(e) => setTotalSeats(Number(e.target.value))} style={{ marginBottom: '16px' }} />
         </Col>
         <Col span={24}>
-          <Button type="primary" block onClick={addOrUpdateSeats}>{seat ? 'Update Seat' : 'Add Seats'}</Button> {/* Conditional button text */}
+          <Button type="primary" block onClick={addOrUpdateSeats}>{seat ? 'Update Seat' : 'Add Seats'}</Button>
         </Col>
       </Row>
     </div>

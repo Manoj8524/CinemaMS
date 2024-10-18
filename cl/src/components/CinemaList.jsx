@@ -7,7 +7,7 @@ import {
   notification,
   Spin,
 } from 'antd';
-import CinemaForm from './CinemaForm'; // Import CinemaForm
+import CinemaForm from './CinemaForm'; 
 
 const API_URL = 'https://cinemams.onrender.com/api/cinemas';
 
@@ -56,7 +56,7 @@ const CinemaList = () => {
 
   const handleFormSubmit = () => {
     setEditingCinema(null);
-    // Refresh the cinema list
+
     const fetchCinemas = async () => {
       const response = await axios.get(API_URL);
       setCinemas(response.data);
@@ -71,21 +71,21 @@ const CinemaList = () => {
   const containerStyle = {
     display: 'flex',
     padding: '20px',
-    alignItems: 'flex-start', // Align items to the top of the container
+    alignItems: 'flex-start', 
   };
 
   const formStyle = {
-    flex: '0 0 20%', // 10% width for the form
+    flex: '0 0 20%', 
     marginRight: '20px',
   };
 
   const tableStyle = {
-    flex: '0 0 80%', // 80% width for the table
+    flex: '0 0 80%', 
   };
 
   return (
     <div style={containerStyle}>
-      {/* Left side - Cinema Form */}
+    
       <div style={formStyle}>
         <Typography.Title level={3}>Cinema Management</Typography.Title>
         <CinemaForm
@@ -95,7 +95,7 @@ const CinemaList = () => {
         />
       </div>
 
-      {/* Right side - Table */}
+     
       <div style={tableStyle}>
         {loading ? (
           <Spin tip="Loading..." />

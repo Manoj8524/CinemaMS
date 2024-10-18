@@ -1,13 +1,13 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { 
-  VideoCameraOutlined,  // Use VideoCameraOutlined instead of FilmOutlined
+  VideoCameraOutlined,  
   ApartmentOutlined, 
   BranchesOutlined, 
   UserOutlined, 
   ClockCircleOutlined, 
-  ScheduleOutlined // Change to an available icon
-} from '@ant-design/icons'; // Ensure to import only the available icons
+  ScheduleOutlined 
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { Header } = Layout;

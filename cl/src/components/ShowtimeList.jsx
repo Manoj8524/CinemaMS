@@ -3,17 +3,16 @@ import axios from "axios";
 import { Table, Button } from "antd";
 
 const ShowtimeList = ({ showtimes, fetchShowtimes, setEditShowtime }) => {
-    // Handle delete operation
     const handleDelete = async (id) => {
         try {
             await axios.delete(`https://cinemams.onrender.com/api/showtimes/${id}`);
-            fetchShowtimes(); // Refresh showtime list after delete
+            fetchShowtimes();
         } catch (error) {
             console.error("Error deleting showtime:", error);
         }
     };
 
-    // Define table columns
+
     const columns = [
         {
             title: 'ID',

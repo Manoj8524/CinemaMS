@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Table, Typography, Space, Spin } from 'antd';
-import ScreenForm from './ScreenForm'; // Make sure you have a ScreenForm component
+import ScreenForm from './ScreenForm'; 
 
 const ScreenList = () => {
   const [screens, setScreens] = useState([]);
@@ -12,7 +12,7 @@ const ScreenList = () => {
   useEffect(() => {
     const fetchScreens = async () => {
       try {
-        const response = await axios.get('https://cinemams.onrender.com/api/screens'); // Update with your API endpoint
+        const response = await axios.get('https://cinemams.onrender.com/api/screens');
         setScreens(response.data);
         setLoading(false);
       } catch (err) {
@@ -29,7 +29,7 @@ const ScreenList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://cinemams.onrender.com/api/screens/${id}`); // Update with your API endpoint
+      await axios.delete(`https://cinemams.onrender.com/api/screens/${id}`);
       setScreens(screens.filter((screen) => screen._id !== id));
     } catch (err) {
       setError('Failed to delete screen.');
@@ -38,7 +38,7 @@ const ScreenList = () => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.get('https://cinemams.onrender.com/api/screens'); // Update with your API endpoint
+      const response = await axios.get('https://cinemams.onrender.com/api/screens');
       setScreens(response.data);
       setEditingScreen(null);
     } catch (err) {
@@ -102,16 +102,16 @@ const ScreenList = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Screen Form Section */}
+
       <div style={{ width: '20%', padding: '1rem', borderRight: '1px solid #eaeaea' }}>
         <Typography.Title level={4} style={{ textAlign: 'center' }}>
           Screen Form
         </Typography.Title>
-        {/* Always visible ScreenForm */}
+      
         <ScreenForm screen={editingScreen} onSave={handleSave} onCancel={() => setEditingScreen(null)} />
       </div>
 
-      {/* Screen Table Section */}
+   
       <div style={{ width: '80%', padding: '1rem' }}>
         <Typography.Title level={2} style={{ textAlign: 'center' }}>
           Screens

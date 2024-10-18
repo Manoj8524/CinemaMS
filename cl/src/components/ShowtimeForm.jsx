@@ -93,7 +93,7 @@ const ShowtimeForm = () => {
 
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
-            {/* Left Side - Form */}
+            
             <div style={{ width: '20%', padding: '20px', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
                 <h2 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '20px' }}>{editing ? 'Edit Showtime' : 'Add Showtime'}</h2>
                 <Form layout="vertical" onFinish={handleSubmit}>
@@ -148,7 +148,7 @@ const ShowtimeForm = () => {
                 </Form>
             </div>
 
-            {/* Right Side - Showtime List */}
+         
             <div style={{ width: '80%', padding: '20px', overflowY: 'auto' }}>
                 <ShowtimeList showtimes={showtimes} fetchShowtimes={fetchShowtimes} setEditShowtime={setEditShowtime} />
             </div>

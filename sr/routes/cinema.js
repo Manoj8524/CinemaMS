@@ -1,26 +1,25 @@
 const express = require('express');
-const Cinema = require('../models/Cinema'); // Cinema model import
-const router = express.Router();
+const Cinema = require('../models/Cinema'); 
 
 // Create Cinema
 router.post('/cinemas', async (req, res) => {
-  console.log(req.body); // Incoming request body log panrathu
+  console.log(req.body);
   try {
-    const newCinema = new Cinema(req.body); // New cinema create panrathu
-    await newCinema.save(); // Save cinema to DB
-    res.status(201).json(newCinema); // Success response
+    const newCinema = new Cinema(req.body); 
+    await newCinema.save(); 
+    res.status(201).json(newCinema); 
   } catch (error) {
-    console.error(error); // Error log panrathu
-    res.status(400).json({ message: error.message }); // Error response
+    console.error(error); 
+    res.status(400).json({ message: error.message }); 
   }
 });
 
-// Get all Cinemas
+
 router.get('/cinemas', async (req, res) => {
   try {
     const cinemas = await Cinema.find().populate({
       path: 'theatres',
-      select: 'name', // Select only the name field from Theatre
+      select: 'name', 
     });
     res.json(cinemas);
   } catch (error) {
@@ -28,39 +27,39 @@ router.get('/cinemas', async (req, res) => {
   }
 });
 
-// Get Cinema by ID
+
 router.get('/cinemas/:id', async (req, res) => {
   try {
     const cinema = await Cinema.findById(req.params.id).populate('theatres'); // Cinema by ID fetch panrathu
     if (!cinema) return res.status(404).json({ message: 'Cinema not found' }); // Not found check
-    res.json(cinema); // Response with cinema data
+    res.json(cinema);
   } catch (error) {
-    res.status(500).json({ message: error.message }); // Error response
+    res.status(500).json({ message: error.message }); 
   }
 });
 
-// Update Cinema
+
 router.put('/cinemas/:id', async (req, res) => {
   try {
     const updatedCinema = await Cinema.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Update cinema data
     if (!updatedCinema) return res.status(404).json({ message: 'Cinema not found' }); // Not found check
-    res.json(updatedCinema); // Response with updated cinema data
+    res.json(updatedCinema); 
   } catch (error) {
-    console.error(error); // Error log panrathu
-    res.status(400).json({ message: error.message }); // Error response
+    console.error(error); 
+    res.status(400).json({ message: error.message }); 
   }
 });
 
-// Delete Cinema
+
 router.delete('/cinemas/:id', async (req, res) => {
   try {
-    const cinema = await Cinema.findByIdAndDelete(req.params.id); // Cinema delete panrathu
-    if (!cinema) return res.status(404).json({ message: 'Cinema not found' }); // Not found check
-    res.json({ message: 'Cinema deleted' }); // Success response
+    const cinema = await Cinema.findByIdAndDelete(req.params.id); 
+    if (!cinema) return res.status(404).json({ message: 'Cinema not found' }); 
+    res.json({ message: 'Cinema deleted' });
   } catch (error) {
-    console.error(error); // Error log panrathu
-    res.status(500).json({ message: error.message }); // Error response
+    console.error(error); 
+    res.status(500).json({ message: error.message });
   }
 });
 
-module.exports = router; // Router export panrathu
+module.exports = router; 

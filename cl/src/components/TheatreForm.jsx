@@ -5,16 +5,16 @@ import { Input, Button, Form, message, Space } from 'antd';
 const TheatreForm = ({ theatre, onSave, onCancel }) => {
   const [name, setName] = useState('');
   const [cinema, setCinema] = useState('');
-  const [screens, setScreens] = useState([]); // Change to an array for multiple screen IDs
-  const [id, setId] = useState(''); // State for ID
+  const [screens, setScreens] = useState([]); 
+  const [id, setId] = useState(''); 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (theatre) {
-      setId(theatre._id || ''); // Set ID if editing
+      setId(theatre._id || ''); 
       setName(theatre.name || '');
       setCinema(theatre.cinema || '');
-      setScreens(theatre.screens || []); // Directly set screens to array
+      setScreens(theatre.screens || []); 
     }
   }, [theatre]);
 
@@ -32,21 +32,21 @@ const TheatreForm = ({ theatre, onSave, onCancel }) => {
     const theatreData = {
       name,
       cinema,
-      screens, // Use the current state of screen IDs
+      screens,
     };
 
     try {
       setLoading(true);
       if (theatre && theatre._id) {
-        // PUT request for updating an existing theatre
+       
         await axios.put(`https://cinemams.onrender.com/api/theatres/${theatre._id}`, theatreData);
         message.success('Theatre updated successfully.');
       } else {
-        // POST request for creating a new theatre
+       
         await axios.post('https://cinemams.onrender.com/api/theatres', theatreData);
         message.success('Theatre created successfully.');
       }
-      onSave(); // Refresh the list after save
+      onSave(); 
     } catch (err) {
       message.error('Failed to save theatre. Please check the input fields.');
     } finally {
@@ -55,17 +55,17 @@ const TheatreForm = ({ theatre, onSave, onCancel }) => {
   };
 
   const addScreenField = () => {
-    setScreens([...screens, '']); // Add a new empty screen ID
+    setScreens([...screens, '']); 
   };
 
   const handleScreenChange = (index, value) => {
     const newScreens = [...screens];
-    newScreens[index] = value; // Update the screen ID at the specific index
+    newScreens[index] = value; 
     setScreens(newScreens);
   };
 
   const removeScreenField = (index) => {
-    const newScreens = screens.filter((_, i) => i !== index); // Remove screen ID at the index
+    const newScreens = screens.filter((_, i) => i !== index); 
     setScreens(newScreens);
   };
 
@@ -95,7 +95,7 @@ const TheatreForm = ({ theatre, onSave, onCancel }) => {
               value={screen}
               onChange={(e) => handleScreenChange(index, e.target.value)}
               placeholder={`Screen ID ${index + 1}`}
-              style={{ width: 'calc(100% - 100px)' }} // Adjust width as necessary
+              style={{ width: 'calc(100% - 100px)' }} 
             />
             <Button type="link" onClick={() => removeScreenField(index)}>
               Remove

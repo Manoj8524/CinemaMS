@@ -2,7 +2,7 @@ const express = require('express');
 const Movie = require('../models/Movie');
 const router = express.Router();
 
-// Create Movie
+
 router.post('/movies', async (req, res) => {
   try {
     const newMovie = new Movie(req.body);
@@ -13,16 +13,16 @@ router.post('/movies', async (req, res) => {
   }
 });
 
-// Get All Movies
-// In your router file
+
+
 router.get('/movies', async (req, res) => {
   try {
     const movies = await Movie.find()
       .populate({
         path: 'runningAt',
         populate: {
-          path: 'theatre', // Populate the theatre field inside Screen
-          select: 'name', // Only fetch the theatre name
+          path: 'theatre', 
+          select: 'name', 
         },
       });
     res.json(movies);
@@ -32,7 +32,6 @@ router.get('/movies', async (req, res) => {
 });
 
 
-// Get Movie by ID
 router.get('/movies/:id', async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id).populate('runningAt');
@@ -43,7 +42,7 @@ router.get('/movies/:id', async (req, res) => {
   }
 });
 
-// Update Movie
+
 router.put('/movies/:id', async (req, res) => {
   try {
     const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -54,7 +53,7 @@ router.put('/movies/:id', async (req, res) => {
   }
 });
 
-// Delete Movie
+
 router.delete('/movies/:id', async (req, res) => {
   try {
     const movie = await Movie.findByIdAndDelete(req.params.id);
