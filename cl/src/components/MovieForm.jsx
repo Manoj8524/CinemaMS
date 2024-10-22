@@ -45,7 +45,7 @@ const MovieForm = ({ selectedMovie, setSelectedMovie }) => {
       }
       
       setSelectedMovie(null);
-      navigate('/'); 
+      navigate('/movies'); 
     } catch (error) {
       console.error('Validation Failed:', error);
     }
